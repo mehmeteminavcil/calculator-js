@@ -9,9 +9,22 @@
 
 :root {
   --red: #ee3e3e;
+  --red-transparent: rgba(255, 56, 56, 0.8);
+  --white: #0d0d0d;
+  --transition: 0.4s;
+  --red-btn: #ff5454;
+  --black-gradient-hover: linear-gradient( 180deg, #dedede 0%, #cacaca 50.52%, rgba(210, 210, 210, 0.87) 100%);
+  --black-gradient: linear-gradient( 90deg, #dedede 0%, #cacaca 50.52%, rgba(210, 210, 210, 0.87) 100%);
+}
+
+.dark-mode {
+  --red: #ee3e3e;
   --red-btn: #ff3a3a;
+  --red-transparent: rgba(255, 56, 56, 0.8);
   --white: #fff;
+  --transition: 0.4s;
   --black-gradient: linear-gradient( 180deg, #2e2e2e 0%, #2c2c2c 50.52%, rgba(36, 36, 36, 0.87) 100%);
+  --black-gradient-hover: linear-gradient( 90deg, rgba(46, 46, 46, 1) 0%, rgba(44, 44, 44, 1) 49%, rgba(36, 36, 36, 1) 100%);
 }
 
 html {
@@ -44,6 +57,8 @@ body {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  -webkit-transition: var(--transition);
+  transition: var(--transition);
 }
 
 .calc-type {
@@ -83,8 +98,8 @@ body {
   font-size: 2rem;
   text-align: right;
   height: 3rem;
-  margin-right: 0.5rem;
-  margin-bottom: -2rem;
+  margin-right: 0.3rem;
+  margin-top: 1rem;
 }
 
 .display .screen {
@@ -95,15 +110,22 @@ body {
   font-size: 0.48rem;
 }
 
+.animation {
+  -webkit-animation: showTopText 1s;
+          animation: showTopText 1s;
+  -webkit-animation-delay: 0.5s;
+          animation-delay: 0.5s;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+  bottom: 0;
+  -webkit-transform: translate(0, 100%);
+          transform: translate(0, 100%);
+}
+
 @-webkit-keyframes showTopText {
   0% {
     -webkit-transform: translate3d(0, 100%, 0);
             transform: translate3d(0, 100%, 0);
-  }
-  40%,
-  60% {
-    -webkit-transform: translate3d(0, 50%, 0);
-            transform: translate3d(0, 50%, 0);
   }
   100% {
     -webkit-transform: translate3d(0, 0, 0);
@@ -116,15 +138,55 @@ body {
     -webkit-transform: translate3d(0, 100%, 0);
             transform: translate3d(0, 100%, 0);
   }
-  40%,
-  60% {
-    -webkit-transform: translate3d(0, 50%, 0);
-            transform: translate3d(0, 50%, 0);
-  }
   100% {
     -webkit-transform: translate3d(0, 0, 0);
             transform: translate3d(0, 0, 0);
   }
+}
+
+.theme {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+  margin: 0 0.3rem -1rem auto;
+}
+
+.theme input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.theme input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+.theme .slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--red-transparent);
+  -webkit-transition: var(--transition);
+  transition: var(--transition);
+  border-radius: 60px;
+}
+
+.theme .slider::before {
+  position: absolute;
+  content: "";
+  width: 26px;
+  height: 26px;
+  left: 4px;
+  bottom: 4px;
+  border-radius: 60px;
+  background: var(--black-gradient);
+  -webkit-transition: var(--transition);
+  transition: var(--transition);
 }
 
 .buttons {
@@ -152,13 +214,14 @@ body {
 }
 
 .buttons .button:hover {
-  background: -webkit-gradient(linear, left top, right top, from(#2e2e2e), color-stop(49%, #2c2c2c), to(#242424));
-  background: linear-gradient(90deg, #2e2e2e 0%, #2c2c2c 49%, #242424 100%);
+  background: var(--black-gradient-hover);
 }
 
 .buttons .equal {
   background: var(--red-btn);
   border-radius: 4px;
+  -webkit-box-shadow: 0px 47.3214px 47.3214px rgba(0, 0, 0, 0.19), 0px 17.2731px 17.2731px rgba(0, 0, 0, 0.131096), 0px 8.38577px 8.38577px rgba(0, 0, 0, 0.105695), 0px 4.11086px 4.11086px rgba(0, 0, 0, 0.0843048), 0px 1.62544px 1.62544px rgba(0, 0, 0, 0.0589035);
+          box-shadow: 0px 47.3214px 47.3214px rgba(0, 0, 0, 0.19), 0px 17.2731px 17.2731px rgba(0, 0, 0, 0.131096), 0px 8.38577px 8.38577px rgba(0, 0, 0, 0.105695), 0px 4.11086px 4.11086px rgba(0, 0, 0, 0.0843048), 0px 1.62544px 1.62544px rgba(0, 0, 0, 0.0589035);
 }
 
 .buttons .equal:hover {
@@ -187,17 +250,5 @@ body {
 
 .divide {
   font-size: 0.9rem !important;
-}
-
-.animation {
-  -webkit-animation: showTopText 1s;
-          animation: showTopText 1s;
-  -webkit-animation-delay: 0.5s;
-          animation-delay: 0.5s;
-  -webkit-animation-fill-mode: forwards;
-          animation-fill-mode: forwards;
-  bottom: 0;
-  -webkit-transform: translate(0, 100%);
-          transform: translate(0, 100%);
 }
 /*# sourceMappingURL=style.css.map */

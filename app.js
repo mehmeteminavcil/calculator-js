@@ -1,6 +1,7 @@
 let screen = document.querySelector(".screen");
 let screenSmall = document.querySelector(".screen-small");
 let buttons = Array.from(document.getElementsByClassName("button"));
+const themeBtn = document.getElementById("theme-btn");
 
 buttons.map((button) => {
     button.addEventListener("click", (e) => {
@@ -27,4 +28,8 @@ buttons.map((button) => {
                 screen.innerText += e.target.innerText;
         }
     });
+});
+
+themeBtn.addEventListener("click", (e) => {
+    document.body.classList.toggle("dark-mode");
 });
