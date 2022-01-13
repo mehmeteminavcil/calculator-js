@@ -12,6 +12,7 @@ buttons.map((button) => {
                 if (screen.innerText) {
                     screen.innerText = screen.innerText.slice(0, -1);
                 }
+
                 break;
             case "=":
                 try {
